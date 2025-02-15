@@ -1,6 +1,4 @@
 [versions]
-accompanistPermissions = "0.32.0"
-
 androidGradlePlugin = "8.2.2"
 androidxCore = "1.12.0"
 androidxLifecycle = "2.7.0"
@@ -19,11 +17,6 @@ junit = "4.13.2"
 kotlin = "1.9.22"
 ksp = "1.9.22-1.0.17"
 protoliteWellKnownTypes = "18.0.0"
-secrets = "2.0.1"
-google-services = "4.4.1"
-playServicesLocation = "21.2.0"
-crashlytics = "2.9.0"
-core = "1.43.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -55,10 +48,6 @@ hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version.ref = "protoliteWellKnownTypes" }
-play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
-accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
-core = { group = "com.google.ar", name = "core", version.ref = "core" }
-
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -67,5 +56,3 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
 hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-secrets-gradle-plugin = {id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets"}
-google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }

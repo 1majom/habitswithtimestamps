@@ -1,81 +1,35 @@
 package hu.bme.sch.monkie.habits.data.datasource
 
 import hu.bme.sch.monkie.habits.data.local.database.DatesDao
-import hu.bme.sch.monkie.habits.data.local.database.LocalTimeStamp
+import hu.bme.sch.monkie.habits.data.local.database.LocalHabit
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDateTime
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-
 interface DateRepository {
-    suspend fun get3(id: Int): Flow<List<LocalTimeStamp>>
-    suspend fun getAll(id: Int): Flow<List<LocalTimeStamp>>
-    suspend fun delete(id: Int)
-    suspend fun deleteLastFromHabit(habitId: Int)
+    val dates: Flow<List<String>>
+
+    suspend fun add(name: String)
+    suspend fun delete(name: String)
+    suspend fun update(name: String)
 
 
-    suspend fun update(id: Int, new:LocalDateTime, temp: Double?,visi: Double?)
-    suspend fun add(theHabit: Int, temp:Double, visibility:Double)
-    suspend fun get(id: Int): Flow<List<LocalTimeStamp>>
 }
 
 class DefaultDateRepository @Inject constructor(
-    private val datesListDao: DatesDao,
-
+    private val datesListDao: DatesDao
 ) : DateRepository {
 
-    override suspend fun add(theHabit:Int, temp:Double, visibility:Double) {
-        val currentTime = LocalDateTime.now()
-        datesListDao.insertDate(LocalTimeStamp(theHabit, currentTime, temp, visibility))
-    }
-    override suspend fun get3(id: Int): Flow<List<LocalTimeStamp>> {
-        return datesListDao.getSomeDates(id)
-    }
-    override suspend fun get(id: Int): Flow<List<LocalTimeStamp>> {
-        return datesListDao.getDate(id)
-    }
-    override suspend fun getAll(id: Int): Flow<List<LocalTimeStamp>> {
-        return datesListDao.getAllDates(id)
-    }
-    override suspend fun delete(id: Int) {
-        datesListDao.deleteDate(id)
-    }
-    override suspend fun deleteLastFromHabit(id: Int) {
+    override val dates: Flow<List<String>> =
+        datesListDao.getAllDates().map { items -> items.map { it.name } }
 
-        datesListDao.deleteLastFromHabit(id)
+    override suspend fun add(name: String) {
+        datesListDao.insertDate(LocalHabit(name = name))
     }
-    override suspend fun update(id: Int, new:LocalDateTime, temp: Double?,visi: Double?) {
-        datesListDao.updateDate(id, new, temp, visi)
+    override suspend fun delete(name: String) {
+        datesListDao.deleteDate(LocalHabit(name = name))
     }
-}
-
-class LocalDateFakeRepository : DateRepository {
-    override suspend fun get3(id: Int): Flow<List<LocalTimeStamp>> {
-        TODO("Not yet implemented")
+    override suspend fun update(name: String) {
+        datesListDao.updateDate(LocalHabit(name = name))
     }
-
-    override suspend fun getAll(id: Int): Flow<List<LocalTimeStamp>> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun delete(id: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteLastFromHabit(habitId: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun update(id: Int, new: LocalDateTime, temp: Double?, visi: Double?) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun add(theHabit: Int, temp: Double, visibility: Double) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun get(id: Int): Flow<List<LocalTimeStamp>> {
-        TODO("Not yet implemented")
-    }
-
 }
