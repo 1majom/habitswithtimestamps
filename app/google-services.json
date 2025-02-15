@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "373514428249",
+    "project_id": "habits1-f60de",
+    "storage_bucket": "habits1-f60de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373514428249:android:315cfee31138b4ec94f648",
+        "android_client_info": {
+          "package_name": "hu.bme.sch.monkie.habits"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcychEKUad7_oM6fwwzvVUdBFHYbANpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

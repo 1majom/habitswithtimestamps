@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Simple OpenWeatherMap API get
+  description: Only GETing info from OpenWeatherMap API https://api.openweathermap.org/
+  version: 1.0.0
+paths:
+  /data/2.5/weather:
+    get:
+      summary: Get temperature data
+      description: Retrieve current temperature data from OpenWeatherMap
+      parameters:
+        - name: lon
+          in: query
+          required: true
+          description: coordinate, longitude
+          schema:
+            type: string
+        - name: lat
+          in: query
+          required: true
+          description: coordinate, latitude
+          schema:
+            type: string
+        - name: appid
+          in: query
+          required: true
+          description: Your OpenWeatherMap API key
+          schema:
+            type: string
+        - name: units
+          in: query
+          required: false
+          description: The units which are returned in the API response. I mainly use "metric" for Celsius
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coord:
+                    type: object
+                    properties:
+                      lon:
+                        type: number
+                        description: Longitude
+                      lat:
+                        type: number
+                        description: Latitude
+                  weather:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: identifing the current weather like sunny, clouds, rain, etc
+                        main:
+                          type: string
+                          description: short description of the current weather
+                        description:
+                          type: string
+                          description: long description of the current weather
+                        icon:
+                          type: string
+                  base:
+                    type: string
+                    description: Source of data
+                  main:
+                    type: object
+                    properties:
+                      temp:
+                        type: number
+                      feels_like:
+                        type: number
+                      temp_min:
+                        type: number
+                      temp_max:
+                        type: number
+                      pressure:
+                        type: integer
+                      humidity:
+                        type: integer
+                      sea_level:
+                        type: integer
+                      grnd_level:
+                        type: integer
+                  visibility:
+                    type: integer
+                  wind:
+                    type: object
+                    properties:
+                      speed:
+                        type: number
+                      deg:
+                        type: integer
+                      gust:
+                        type: number
+                  clouds:
+                    type: object
+                    properties:
+                      all:
+                        type: integer
+                  dt:
+                    type: integer
+                  sys:
+                    type: object
+                    properties:
+                      sunrise:
+                        type: integer
+                        description: Unix timestamp
+                      sunset:
+                        type: integer
+                        description: Unix timestamp
+                  timezone:
+                    type: integer
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  cod:
+                    type: integer
+                    description: response code, 200 if all other is provided, because it is a successful response
+        '401':
+          description: Unauthorized - API key is invalid
+        '404':
+          description: City not found
