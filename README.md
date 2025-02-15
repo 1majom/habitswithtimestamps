@@ -70,16 +70,5 @@ Itt szerkeszthetőek, törölhetőek, létrehozhatóak a szokások maguk. Emelle
 <img src="./assets/settings@1x.png">
 
 
-# Házi feladat architektúra és környezet
-
-Az MVVM architektúrát választottam, mivel a labor kiírásában ez szerepelt ajánlottként, valamint mivel a Google által is jelenleg ez az ajánlott architektúra. Az ajánlás mentén a felhasználói felület és az adatok egyértelműen szétválaszthatóak, de könnyű kezelés mellett hivatkozhatnak egymásra. 
-
-<img src="./assets/githubcommit.png">
-
-
-<img src="./assets/githubaction.png">
-
-
-
 
 
